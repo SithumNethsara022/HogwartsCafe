@@ -6,7 +6,7 @@ import { useCart } from "@/hooks/use-cart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ItemCustomizer from "./ItemCustomizer";
 import Image from "next/image";
 import { Plus, Image as ImageIcon } from "lucide-react";
@@ -101,6 +101,11 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
         </div>
       </DialogTrigger>
       <DialogContent className="glass-dark border-primary/20 max-w-xl text-foreground">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-headline text-primary">
+            Customize {item.name}
+          </DialogTitle>
+        </DialogHeader>
         <ItemCustomizer item={item} onAdd={onAdd} onClose={() => setIsOpen(false)} />
       </DialogContent>
     </Dialog>

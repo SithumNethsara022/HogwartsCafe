@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -44,10 +43,9 @@ export default function ItemCustomizer({ item, onAdd, onClose }: ItemCustomizerP
   };
 
   return (
-    <div className="space-y-6 pt-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-xl font-headline text-primary">Customize your magical meal</h3>
-        <div className="text-2xl font-bold">LKR {totalPrice}</div>
+    <div className="space-y-6 pt-2">
+      <div className="flex items-center justify-end">
+        <div className="text-2xl font-bold text-primary">LKR {totalPrice}</div>
       </div>
 
       {item.prices.half && (
