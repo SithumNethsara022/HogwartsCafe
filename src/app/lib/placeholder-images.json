@@ -1,0 +1,41 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-castle",
+      "description": "Magical castle silhouette under moonlight",
+      "imageUrl": "https://picsum.photos/seed/hogwarts-castle/1200/600",
+      "imageHint": "magical castle"
+    },
+    {
+      "id": "item-butterbeer",
+      "description": "Frothy magical beverage in a glass mug",
+      "imageUrl": "https://picsum.photos/seed/butterbeer/400/300",
+      "imageHint": "butterbeer mug"
+    },
+    {
+      "id": "item-pasta",
+      "description": "Creamy magical pasta with herbs",
+      "imageUrl": "https://picsum.photos/seed/pasta/400/300",
+      "imageHint": "creamy pasta"
+    },
+    {
+      "id": "item-wings",
+      "description": "Spicy chicken wings served on a platter",
+      "imageUrl": "https://picsum.photos/seed/wings/400/300",
+      "imageHint": "chicken wings"
+    },
+    {
+      "id": "item-rice",
+      "description": "Special Nasi Goreng with fried egg and toppings",
+      "imageUrl": "https://picsum.photos/seed/nasigoreng/400/300",
+      "imageHint": "fried rice"
+    },
+    {
+      "id": "sorting-hat",
+      "description": "The magical sorting hat",
+      "imageUrl": "https://picsum.photos/seed/sortinghat/400/400",
+      "imageHint": "sorting hat"
+    }
+  ]
+}
