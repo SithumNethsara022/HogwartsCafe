@@ -3,31 +3,18 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type House = "gryffindor" | "slytherin" | "ravenclaw" | "hufflepuff";
-
+// Simplified to a single Hogwarts theme as requested
 interface HouseThemeContextType {
-  house: House;
-  setHouse: (house: House) => void;
+  theme: string;
 }
 
 const HouseThemeContext = createContext<HouseThemeContextType | undefined>(undefined);
 
 export function HouseThemeProvider({ children }: { children: React.ReactNode }) {
-  const [house, setHouse] = useState<House>("gryffindor");
-
-  useEffect(() => {
-    const saved = localStorage.getItem("marauders-house") as House;
-    if (saved) setHouse(saved);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("marauders-house", house);
-    document.documentElement.className = `theme-${house}`;
-  }, [house]);
-
+  // Use a constant magical theme
   return (
-    <HouseThemeContext.Provider value={{ house, setHouse }}>
-      <div className={`theme-${house} transition-colors duration-700`}>
+    <HouseThemeContext.Provider value={{ theme: "hogwarts" }}>
+      <div className="theme-hogwarts transition-colors duration-700">
         {children}
       </div>
     </HouseThemeContext.Provider>
