@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -10,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import ItemCustomizer from "./ItemCustomizer";
 import Image from "next/image";
-import { Plus } from "lucide-react";
+import { Plus, Image as ImageIcon } from "lucide-react";
 
 export default function MenuDisplay() {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
@@ -22,7 +21,7 @@ export default function MenuDisplay() {
     <section id="menu" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-5xl font-headline text-primary mb-4 drop-shadow-lg">Marauder&apos;s Menu</h2>
-        <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
+        <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto rounded-full mb-6" />
         <p className="text-muted-foreground italic font-headline text-xl">
           I solemnly swear that I am up to no good...
         </p>
@@ -61,13 +60,20 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
       <DialogTrigger asChild>
         <div className="group relative cursor-pointer magical-hover">
           <Card className="glass overflow-hidden border-white/5 hover:border-primary/50 transition-colors h-full flex flex-col">
-            <div className="relative h-56 w-full">
-              <Image 
-                src={item.image} 
-                alt={item.name} 
-                fill 
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
+            <div className="relative h-56 w-full bg-secondary/20 flex items-center justify-center">
+              {item.image ? (
+                <Image 
+                  src={item.image} 
+                  alt={item.name} 
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+              ) : (
+                <div className="flex flex-col items-center gap-2 opacity-20 group-hover:opacity-40 transition-opacity">
+                  <ImageIcon className="w-12 h-12 text-primary" />
+                  <span className="text-[10px] uppercase font-bold tracking-widest">Add Photo</span>
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-4 left-4">
                 <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/60 bg-black/40 backdrop-blur-md px-2 py-1 rounded">

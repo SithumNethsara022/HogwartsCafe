@@ -1,4 +1,3 @@
-
 export interface MenuItem {
   id: string;
   name: string;
@@ -21,7 +20,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Freshly popped magical corn kernels.',
     category: 'Bites',
     prices: { base: 450 },
-    image: 'https://picsum.photos/seed/popcorn/400/300'
+    image: '' // User to add photo
   },
   {
     id: 'bites-2',
@@ -29,7 +28,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Crispy golden fries served with wizard sauce.',
     category: 'Bites',
     prices: { base: 650 },
-    image: 'https://picsum.photos/seed/fries/400/300'
+    image: '' // User to add photo
   },
   {
     id: 'bites-3',
@@ -37,7 +36,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Spicy wings straight from the Owlery.',
     category: 'Bites',
     prices: { base: 1100 },
-    image: 'https://picsum.photos/seed/wings-6/400/300'
+    image: '' // User to add photo
   },
   {
     id: 'bites-4',
@@ -45,7 +44,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Toasted bread infused with herbs and melted cheese.',
     category: 'Bites',
     prices: { base: 750 },
-    image: 'https://picsum.photos/seed/garlicbread/400/300'
+    image: '' // User to add photo
   },
   // Rice
   {
@@ -55,7 +54,7 @@ export const MENU_DATA: MenuItem[] = [
     category: 'Rice',
     prices: { base: 1250 },
     toppings: ['Fried Egg', 'Prawns', 'Cashew', 'Mushroom', 'Meatballs'],
-    image: 'https://picsum.photos/seed/special-rice/400/300'
+    image: '' // User to add photo
   },
   {
     id: 'rice-2',
@@ -63,7 +62,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Extra spicy rice for the brave of heart.',
     category: 'Rice',
     prices: { base: 1150 },
-    image: 'https://picsum.photos/seed/spicy-rice/400/300'
+    image: '' // User to add photo
   },
   // Pasta
   {
@@ -72,7 +71,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Rich creamy sauce with bits of smoke-cured meat.',
     category: 'Pasta',
     prices: { half: 850, full: 1450, base: 1450 },
-    image: 'https://picsum.photos/seed/pasta-carb/400/300'
+    image: '' // User to add photo
   },
   {
     id: 'pasta-2',
@@ -80,7 +79,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'Fresh basil and herb infusion.',
     category: 'Pasta',
     prices: { half: 750, full: 1350, base: 1350 },
-    image: 'https://picsum.photos/seed/pasta-pesto/400/300'
+    image: '' // User to add photo
   },
   {
     id: 'pasta-3',
@@ -88,7 +87,7 @@ export const MENU_DATA: MenuItem[] = [
     description: 'House-made meatballs in a zesty tomato sauce.',
     category: 'Pasta',
     prices: { half: 950, full: 1650, base: 1650 },
-    image: 'https://picsum.photos/seed/pasta-meatball/400/300'
+    image: '' // User to add photo
   }
 ];
 
