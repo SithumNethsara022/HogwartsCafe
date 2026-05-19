@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MENU_DATA, CATEGORIES, MenuItem } from "@/app/lib/menu-data";
 import { useCart } from "@/hooks/use-cart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,7 +20,7 @@ export default function MenuDisplay() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (tabsListRef.current) {
-      const scrollAmount = 200;
+      const scrollAmount = 300;
       tabsListRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -39,21 +39,21 @@ export default function MenuDisplay() {
       </div>
 
       <Tabs defaultValue={CATEGORIES[0]} onValueChange={setActiveCategory} className="space-y-12">
-        <div className="relative max-w-4xl mx-auto group">
+        <div className="relative max-w-5xl mx-auto group">
           <button 
             onClick={() => scroll('left')}
-            className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 glass rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
+            className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 glass rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block z-10"
           >
             <ChevronLeft className="h-6 w-6 text-primary" />
           </button>
           
-          <div className="overflow-x-auto no-scrollbar" ref={tabsListRef}>
+          <div className="overflow-x-auto no-scrollbar scroll-smooth" ref={tabsListRef}>
             <TabsList className="bg-white/5 border border-white/10 p-1 h-auto rounded-full flex w-max min-w-full">
               {CATEGORIES.map((cat) => (
                 <TabsTrigger 
                   key={cat} 
                   value={cat}
-                  className="rounded-full py-3 px-8 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-headline text-lg whitespace-nowrap transition-all"
+                  className="rounded-full py-3 px-6 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-headline text-base whitespace-nowrap transition-all"
                 >
                   {cat}
                 </TabsTrigger>
@@ -63,7 +63,7 @@ export default function MenuDisplay() {
 
           <button 
             onClick={() => scroll('right')}
-            className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 glass rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
+            className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 glass rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden lg:block z-10"
           >
             <ChevronRight className="h-6 w-6 text-primary" />
           </button>
@@ -94,7 +94,7 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
       <DialogTrigger asChild>
         <div className="group relative cursor-pointer magical-hover">
           <Card className="glass overflow-hidden border-white/5 hover:border-primary/50 transition-colors h-full flex flex-col">
-            <div className="relative h-56 w-full bg-secondary/20 flex items-center justify-center">
+            <div className="relative h-48 w-full bg-secondary/10 flex items-center justify-center">
               {item.image ? (
                 <Image 
                   src={item.image} 
@@ -103,31 +103,31 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               ) : (
-                <div className="flex flex-col items-center gap-2 opacity-10 group-hover:opacity-30 transition-opacity">
+                <div className="flex flex-col items-center gap-2 opacity-5 group-hover:opacity-20 transition-opacity">
                   <ImageIcon className="w-12 h-12 text-primary" />
-                  <span className="text-[10px] uppercase font-bold tracking-widest">Add Photo</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-primary">Photo Coming Soon</span>
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-              <div className="absolute bottom-4 left-4">
-                <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/60 bg-black/60 backdrop-blur-md px-2 py-1 rounded">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
+              <div className="absolute bottom-3 left-3">
+                <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-white/60 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded">
                   {item.category}
                 </span>
               </div>
             </div>
-            <CardContent className="p-6 flex-1 flex flex-col">
-              <div className="flex justify-between items-start mb-2">
-                <h3 className="text-2xl font-headline group-hover:text-primary transition-colors">{item.name}</h3>
+            <CardContent className="p-5 flex-1 flex flex-col">
+              <div className="flex justify-between items-start mb-1">
+                <h3 className="text-xl font-headline group-hover:text-primary transition-colors leading-tight">{item.name}</h3>
               </div>
-              <p className="text-sm text-muted-foreground flex-1 mb-6 italic leading-relaxed line-clamp-2">
-                {item.description}
+              <p className="text-xs text-muted-foreground flex-1 mb-4 italic leading-relaxed line-clamp-2">
+                {item.description || "Freshly prepared with the finest ingredients."}
               </p>
               <div className="flex justify-between items-center mt-auto">
                 <div className="text-lg font-headline font-bold text-primary">
-                  {item.prices.half ? `From Rs ${item.prices.half}` : `Rs ${item.prices.base}`}
+                  Rs {item.prices.base.toLocaleString()}
                 </div>
-                <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-lg magical-glow group-hover:rotate-90 transition-transform">
-                  <Plus className="h-6 w-6" />
+                <div className="h-9 w-9 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-lg magical-glow group-hover:rotate-90 transition-transform">
+                  <Plus className="h-5 w-5" />
                 </div>
               </div>
             </CardContent>
@@ -137,7 +137,7 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
       <DialogContent className="glass-dark border-primary/20 max-w-xl text-foreground">
         <DialogHeader>
           <DialogTitle className="text-2xl font-headline text-primary">
-            Customize {item.name}
+            {item.name}
           </DialogTitle>
         </DialogHeader>
         <ItemCustomizer item={item} onAdd={onAdd} onClose={() => setIsOpen(false)} />

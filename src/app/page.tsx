@@ -10,7 +10,7 @@ export default function Home() {
     phone: "[Add Your Phone Number]",
     email: "[Add Your Email]",
     address: "[Add Your Address]",
-    googleMapsLink: "https://maps.google.com" // Update this link
+    googleMapsLink: "https://maps.google.com" // Replace with your actual Google Maps link
   };
 
   return (
@@ -35,7 +35,7 @@ export default function Home() {
           </nav>
 
           <div className="hidden sm:flex items-center gap-2 glass px-4 py-2 rounded-full text-[10px] font-bold tracking-widest text-primary/80 uppercase border-primary/20">
-            Hogsmeade Experience
+            Official Experience
           </div>
         </div>
       </header>
@@ -44,8 +44,8 @@ export default function Home() {
         {/* Hero Section */}
         <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/20 to-accent/20" />
-            <div className="w-full h-full flex items-center justify-center opacity-5">
+            <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/30 to-accent/30" />
+            <div className="w-full h-full flex items-center justify-center opacity-10">
                <Wand className="w-64 h-64 text-primary animate-pulse" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/80 to-background" />
@@ -53,19 +53,19 @@ export default function Home() {
 
           <div className="relative z-10 text-center space-y-8 px-4 max-w-4xl mx-auto">
             <div className="inline-block glass rounded-full px-6 py-2 border-primary/20 mb-4 animate-bounce">
-              <span className="text-primary font-headline italic">Taste the Magic</span>
+              <span className="text-primary font-headline italic">Step into Enchantment</span>
             </div>
             <h1 className="text-6xl md:text-9xl font-headline text-primary drop-shadow-[0_0_40px_rgba(211,166,37,0.4)] uppercase">
               Hogwarts Cafe
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground font-headline max-w-2xl mx-auto leading-relaxed italic">
-              Premium flavors, magical surroundings, and a feast fit for the Great Hall. 
+              Experience the magic of authentic flavors and premium surroundings fit for a feast. 
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
               <a href="#menu">
                 <button className="bg-primary text-primary-foreground font-headline px-10 py-5 rounded-full text-xl magical-glow hover:scale-105 transition-transform">
-                  View Menu
+                  Explore Menu
                 </button>
               </a>
               <SortingHatTrigger />
