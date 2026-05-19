@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { MenuItem, TOPPING_PRICES } from "@/app/lib/menu-data";
+import { MenuItem } from "@/app/lib/menu-data";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Plus, Minus, Wand2 } from "lucide-react";
@@ -18,17 +17,9 @@ interface ItemCustomizerProps {
 export default function ItemCustomizer({ item, onAdd, onClose }: ItemCustomizerProps) {
   const [quantity, setQuantity] = useState(1);
   const [portion, setPortion] = useState<'half' | 'full'>(item.prices.half ? 'half' : 'full');
-  const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
 
   const basePrice = portion === 'half' ? (item.prices.half || item.prices.base) : (item.prices.full || item.prices.base);
-  const toppingsTotal = selectedToppings.reduce((sum, t) => sum + TOPPING_PRICES[t], 0);
-  const totalPrice = basePrice + toppingsTotal;
-
-  const handleToggleTopping = (topping: string) => {
-    setSelectedToppings(prev => 
-      prev.includes(topping) ? prev.filter(t => t !== topping) : [...prev, topping]
-    );
-  };
+  const totalPrice = basePrice;
 
   const handleAdd = () => {
     onAdd({
@@ -37,70 +28,55 @@ export default function ItemCustomizer({ item, onAdd, onClose }: ItemCustomizerP
       price: totalPrice,
       quantity,
       portion: item.prices.half ? portion : undefined,
-      toppings: selectedToppings.length > 0 ? selectedToppings : undefined
     });
     onClose();
   };
 
   return (
     <div className="space-y-6 pt-2">
-      <div className="flex items-center justify-end">
-        <div className="text-2xl font-bold text-primary">LKR {totalPrice}</div>
+      <div className="flex items-center justify-between">
+        <div className="text-muted-foreground text-sm italic pr-4">{item.description}</div>
+        <div className="text-2xl font-bold text-primary whitespace-nowrap">Rs {totalPrice * quantity}</div>
       </div>
 
       {item.prices.half && (
-        <div className="space-y-3">
-          <Label className="text-sm uppercase tracking-widest text-muted-foreground">Portion Size</Label>
+        <div className="space-y-3 p-4 glass rounded-xl border-primary/10">
+          <Label className="text-xs uppercase tracking-widest text-muted-foreground font-bold">Portion Size</Label>
           <RadioGroup 
             value={portion} 
             onValueChange={(v) => setPortion(v as 'half' | 'full')}
-            className="flex gap-4"
+            className="flex flex-col gap-3"
           >
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="half" id="half" />
-              <Label htmlFor="half">Half Portion (LKR {item.prices.half})</Label>
+            <div className="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-colors">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="half" id="half" className="border-primary text-primary" />
+                <Label htmlFor="half" className="cursor-pointer">Half Portion</Label>
+              </div>
+              <span className="text-primary font-bold">Rs {item.prices.half}</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="full" id="full" />
-              <Label htmlFor="full">Full Portion (LKR {item.prices.full})</Label>
+            <div className="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-colors">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="full" id="full" className="border-primary text-primary" />
+                <Label htmlFor="full" className="cursor-pointer">Full Portion</Label>
+              </div>
+              <span className="text-primary font-bold">Rs {item.prices.full}</span>
             </div>
           </RadioGroup>
         </div>
       )}
 
-      {item.toppings && (
-        <div className="space-y-3">
-          <Label className="text-sm uppercase tracking-widest text-muted-foreground">Add Extras (Toppings)</Label>
-          <div className="grid grid-cols-2 gap-3">
-            {item.toppings.map((topping) => (
-              <div key={topping} className="flex items-center space-x-3 p-3 glass rounded-md hover:bg-white/10 transition-colors">
-                <Checkbox 
-                  id={topping} 
-                  checked={selectedToppings.includes(topping)}
-                  onCheckedChange={() => handleToggleTopping(topping)}
-                />
-                <Label htmlFor={topping} className="flex-1 flex justify-between">
-                  <span>{topping}</span>
-                  <span className="text-xs opacity-70">+LKR {TOPPING_PRICES[topping]}</span>
-                </Label>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="flex items-center justify-between pt-4 border-t border-white/10">
-        <div className="flex items-center gap-4 bg-white/5 rounded-full px-4 py-2">
-          <Button variant="ghost" size="icon" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+      <div className="flex items-center justify-between pt-6 border-t border-white/10">
+        <div className="flex items-center gap-4 bg-white/5 rounded-full px-4 py-2 border border-white/5">
+          <Button variant="ghost" size="icon" className="hover:bg-primary/20 hover:text-primary" onClick={() => setQuantity(Math.max(1, quantity - 1))}>
             <Minus className="h-4 w-4" />
           </Button>
-          <span className="font-bold text-lg min-w-[1ch] text-center">{quantity}</span>
-          <Button variant="ghost" size="icon" onClick={() => setQuantity(quantity + 1)}>
+          <span className="font-bold text-xl min-w-[1.5ch] text-center">{quantity}</span>
+          <Button variant="ghost" size="icon" className="hover:bg-primary/20 hover:text-primary" onClick={() => setQuantity(quantity + 1)}>
             <Plus className="h-4 w-4" />
           </Button>
         </div>
-        <Button onClick={handleAdd} className="rounded-full px-8 magical-glow">
-          <Wand2 className="mr-2 h-4 w-4" />
+        <Button onClick={handleAdd} className="rounded-full h-12 px-8 font-headline text-lg bg-primary text-primary-foreground hover:bg-primary/90 magical-glow transition-all">
+          <Wand2 className="mr-2 h-5 w-5" />
           Add to Cauldron
         </Button>
       </div>

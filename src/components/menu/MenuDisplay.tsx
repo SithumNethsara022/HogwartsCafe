@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MENU_DATA, CATEGORIES, MenuItem } from "@/app/lib/menu-data";
 import { useCart } from "@/hooks/use-cart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -8,43 +8,78 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ItemCustomizer from "./ItemCustomizer";
 import Image from "next/image";
-import { Plus, Image as ImageIcon } from "lucide-react";
+import { Plus, Image as ImageIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function MenuDisplay() {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0]);
   const { addToCart } = useCart();
+  const tabsListRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = MENU_DATA.filter((item) => item.category === activeCategory);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (tabsListRef.current) {
+      const scrollAmount = 200;
+      tabsListRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section id="menu" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="text-center mb-16">
-        <h2 className="text-5xl font-headline text-primary mb-4 drop-shadow-lg uppercase tracking-tight">Hogwarts Cafe Menu</h2>
+        <h2 className="text-5xl font-headline text-primary mb-4 drop-shadow-lg uppercase tracking-tight">The Great Hall Menu</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto rounded-full mb-6" />
         <p className="text-muted-foreground italic font-headline text-xl">
-          Carefully selected ingredients and magical preparations...
+          Authentic magical flavors and premium culinary preparations...
         </p>
       </div>
 
       <Tabs defaultValue={CATEGORIES[0]} onValueChange={setActiveCategory} className="space-y-12">
-        <TabsList className="bg-white/5 border border-white/10 p-1 h-auto rounded-full max-w-2xl mx-auto grid grid-cols-4">
-          {CATEGORIES.map((cat) => (
-            <TabsTrigger 
-              key={cat} 
-              value={cat}
-              className="rounded-full py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-headline text-lg"
-            >
-              {cat}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="relative max-w-4xl mx-auto group">
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 glass rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
+          >
+            <ChevronLeft className="h-6 w-6 text-primary" />
+          </button>
+          
+          <div className="overflow-x-auto no-scrollbar" ref={tabsListRef}>
+            <TabsList className="bg-white/5 border border-white/10 p-1 h-auto rounded-full flex w-max min-w-full">
+              {CATEGORIES.map((cat) => (
+                <TabsTrigger 
+                  key={cat} 
+                  value={cat}
+                  className="rounded-full py-3 px-8 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-headline text-lg whitespace-nowrap transition-all"
+                >
+                  {cat}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
-        <TabsContent value={activeCategory} className="animate-in fade-in duration-700">
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 glass rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:block"
+          >
+            <ChevronRight className="h-6 w-6 text-primary" />
+          </button>
+        </div>
+
+        <TabsContent value={activeCategory} className="animate-in fade-in duration-700 focus-visible:outline-none">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredItems.map((item) => (
               <MenuItemCard key={item.id} item={item} onAdd={addToCart} />
             ))}
           </div>
+          {filteredItems.length === 0 && (
+            <div className="text-center py-20 text-muted-foreground italic">
+              Searching for this collection in the forbidden section... (More items coming soon)
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </section>
@@ -84,12 +119,12 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-2xl font-headline group-hover:text-primary transition-colors">{item.name}</h3>
               </div>
-              <p className="text-sm text-muted-foreground flex-1 mb-6 italic leading-relaxed">
+              <p className="text-sm text-muted-foreground flex-1 mb-6 italic leading-relaxed line-clamp-2">
                 {item.description}
               </p>
               <div className="flex justify-between items-center mt-auto">
                 <div className="text-lg font-headline font-bold text-primary">
-                  {item.prices.half ? `From LKR ${item.prices.half}` : `LKR ${item.prices.base}`}
+                  {item.prices.half ? `From Rs ${item.prices.half}` : `Rs ${item.prices.base}`}
                 </div>
                 <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-lg magical-glow group-hover:rotate-90 transition-transform">
                   <Plus className="h-6 w-6" />
