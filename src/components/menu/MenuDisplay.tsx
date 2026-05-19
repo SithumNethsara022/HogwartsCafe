@@ -5,7 +5,6 @@ import { MENU_DATA, CATEGORIES, MenuItem } from "@/app/lib/menu-data";
 import { useCart } from "@/hooks/use-cart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import ItemCustomizer from "./ItemCustomizer";
 import Image from "next/image";
@@ -20,15 +19,15 @@ export default function MenuDisplay() {
   return (
     <section id="menu" className="py-20 px-4 max-w-7xl mx-auto">
       <div className="text-center mb-16">
-        <h2 className="text-5xl font-headline text-primary mb-4 drop-shadow-lg">Marauder&apos;s Menu</h2>
+        <h2 className="text-5xl font-headline text-primary mb-4 drop-shadow-lg uppercase tracking-tight">Hogwarts Cafe Menu</h2>
         <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto rounded-full mb-6" />
         <p className="text-muted-foreground italic font-headline text-xl">
-          I solemnly swear that I am up to no good...
+          Carefully selected ingredients and magical preparations...
         </p>
       </div>
 
       <Tabs defaultValue={CATEGORIES[0]} onValueChange={setActiveCategory} className="space-y-12">
-        <TabsList className="bg-white/5 border border-white/10 p-1 h-auto rounded-full max-w-lg mx-auto grid grid-cols-3">
+        <TabsList className="bg-white/5 border border-white/10 p-1 h-auto rounded-full max-w-2xl mx-auto grid grid-cols-4">
           {CATEGORIES.map((cat) => (
             <TabsTrigger 
               key={cat} 
@@ -69,14 +68,14 @@ function MenuItemCard({ item, onAdd }: { item: MenuItem; onAdd: any }) {
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               ) : (
-                <div className="flex flex-col items-center gap-2 opacity-20 group-hover:opacity-40 transition-opacity">
+                <div className="flex flex-col items-center gap-2 opacity-10 group-hover:opacity-30 transition-opacity">
                   <ImageIcon className="w-12 h-12 text-primary" />
                   <span className="text-[10px] uppercase font-bold tracking-widest">Add Photo</span>
                 </div>
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
               <div className="absolute bottom-4 left-4">
-                <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/60 bg-black/40 backdrop-blur-md px-2 py-1 rounded">
+                <span className="text-xs uppercase tracking-[0.2em] font-bold text-white/60 bg-black/60 backdrop-blur-md px-2 py-1 rounded">
                   {item.category}
                 </span>
               </div>

@@ -16,78 +16,79 @@ export const MENU_DATA: MenuItem[] = [
   // Bites
   {
     id: 'bites-1',
-    name: 'Hot Buttered Popcorn',
-    description: 'Freshly popped magical corn kernels.',
+    name: 'French Fries',
+    description: 'Classic golden crispy fries served with house-made dipping sauce.',
     category: 'Bites',
-    prices: { base: 450 },
-    image: '' // User to add photo
+    prices: { base: 650 },
+    image: ''
   },
   {
     id: 'bites-2',
-    name: 'French Fries',
-    description: 'Crispy golden fries served with wizard sauce.',
+    name: 'Cheesy Garlic Bread',
+    description: 'Toasted baguette infused with herbs and thick melted mozzarella.',
     category: 'Bites',
-    prices: { base: 650 },
-    image: '' // User to add photo
+    prices: { base: 750 },
+    image: ''
   },
   {
     id: 'bites-3',
     name: 'Chicken Wings (6pcs)',
-    description: 'Spicy wings straight from the Owlery.',
+    description: 'Succulent wings tossed in your choice of spicy or honey glaze.',
     category: 'Bites',
-    prices: { base: 1100 },
-    image: '' // User to add photo
+    prices: { base: 1150 },
+    image: ''
   },
   {
     id: 'bites-4',
-    name: 'Cheesy Garlic Bread',
-    description: 'Toasted bread infused with herbs and melted cheese.',
+    name: 'Potato Wedges',
+    description: 'Thick-cut seasoned wedges served with a magical sour cream dip.',
     category: 'Bites',
-    prices: { base: 750 },
-    image: '' // User to add photo
+    prices: { base: 850 },
+    image: ''
   },
   // Rice
   {
     id: 'rice-1',
-    name: 'Hogwarts Special Nasi Goreng',
-    description: 'Wok-fired rice with traditional wizarding spices.',
+    name: 'Hogwarts Special Rice',
+    description: 'Our signature wok-fired rice with a blend of secret spices and premium ingredients.',
     category: 'Rice',
-    prices: { base: 1250 },
+    prices: { base: 1450 },
     toppings: ['Fried Egg', 'Prawns', 'Cashew', 'Mushroom', 'Meatballs'],
-    image: '' // User to add photo
+    image: ''
   },
   {
     id: 'rice-2',
     name: 'Dragon Fire Fried Rice',
-    description: 'Extra spicy rice for the brave of heart.',
+    description: 'Intensely spicy fried rice for those who seek adventure.',
     category: 'Rice',
-    prices: { base: 1150 },
-    image: '' // User to add photo
+    prices: { base: 1250 },
+    image: ''
   },
   // Pasta
   {
     id: 'pasta-1',
     name: 'Creamy Carbonara',
-    description: 'Rich creamy sauce with bits of smoke-cured meat.',
+    description: 'Rich, velvet sauce with crispy bacon bits and parmesan cheese.',
     category: 'Pasta',
-    prices: { half: 850, full: 1450, base: 1450 },
-    image: '' // User to add photo
+    prices: { half: 850, full: 1550, base: 1550 },
+    image: ''
   },
   {
     id: 'pasta-2',
     name: 'Basil Pesto Pasta',
-    description: 'Fresh basil and herb infusion.',
+    description: 'Fragrant house-made basil pesto with nuts and extra virgin olive oil.',
     category: 'Pasta',
-    prices: { half: 750, full: 1350, base: 1350 },
-    image: '' // User to add photo
+    prices: { half: 750, full: 1450, base: 1450 },
+    image: ''
   },
+  // Beverages
   {
-    id: 'pasta-3',
-    name: 'Spicy Meatball Marinara',
-    description: 'House-made meatballs in a zesty tomato sauce.',
-    category: 'Pasta',
-    prices: { half: 950, full: 1650, base: 1650 },
-    image: '' // User to add photo
+    id: 'bev-1',
+    name: 'Butterbeer',
+    description: 'The wizarding world\'s most famous frothy, butterscotch-flavored beverage.',
+    category: 'Beverages',
+    prices: { base: 850 },
+    image: ''
   }
 ];
 
@@ -99,4 +100,4 @@ export const TOPPING_PRICES: Record<string, number> = {
   'Meatballs': 300
 };
 
-export const CATEGORIES = ['Bites', 'Rice', 'Pasta'];
+export const CATEGORIES = ['Bites', 'Rice', 'Pasta', 'Beverages'];
