@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -14,15 +13,15 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sparkles, Loader2, Wand2 } from "lucide-react";
-import { useHouseTheme } from "@/components/theme/HouseThemeContext";
 
 export default function SortingHatTrigger() {
   const [mood, setMood] = useState("");
   const [cravings, setCravings] = useState("");
+  const [house, setHouse] = useState<string>("Gryffindor");
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState<any[]>([]);
-  const { house } = useHouseTheme();
 
   const handleGetSuggestions = async () => {
     setLoading(true);
@@ -30,7 +29,7 @@ export default function SortingHatTrigger() {
       const result = await sortingHatMenuSuggestion({
         mood,
         cravings,
-        housePreference: house.charAt(0).toUpperCase() + house.slice(1),
+        housePreference: house,
         fullMenuJson: JSON.stringify(MENU_DATA),
       });
       setSuggestions(result.suggestions);
@@ -58,11 +57,11 @@ export default function SortingHatTrigger() {
         </DialogHeader>
         
         <div className="space-y-6 py-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label className="text-muted-foreground">Your Mood</Label>
               <Input 
-                placeholder="Adventurous, study-mode..." 
+                placeholder="Adventurous..." 
                 className="glass"
                 value={mood}
                 onChange={(e) => setMood(e.target.value)}
@@ -71,11 +70,25 @@ export default function SortingHatTrigger() {
             <div className="space-y-2">
               <Label className="text-muted-foreground">Any Cravings?</Label>
               <Input 
-                placeholder="Spicy, sweet, hearty..." 
+                placeholder="Spicy, sweet..." 
                 className="glass"
                 value={cravings}
                 onChange={(e) => setCravings(e.target.value)}
               />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-muted-foreground">Your House</Label>
+              <Select value={house} onValueChange={setHouse}>
+                <SelectTrigger className="glass">
+                  <SelectValue placeholder="Select House" />
+                </SelectTrigger>
+                <SelectContent className="glass-dark border-white/10">
+                  <SelectItem value="Gryffindor">Gryffindor</SelectItem>
+                  <SelectItem value="Slytherin">Slytherin</SelectItem>
+                  <SelectItem value="Ravenclaw">Ravenclaw</SelectItem>
+                  <SelectItem value="Hufflepuff">Hufflepuff</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

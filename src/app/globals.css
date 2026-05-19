@@ -1,63 +1,28 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 39 19% 10%;
+  --background: 39 19% 8%;
   --foreground: 39 20% 90%;
-  --card: 39 19% 12%;
+  --card: 39 19% 10%;
   --card-foreground: 39 20% 95%;
-  --popover: 39 19% 8%;
+  --popover: 39 19% 7%;
   --popover-foreground: 39 20% 95%;
-  --primary: 43 74% 49%;
+  --primary: 43 74% 49%; /* Antique Gold */
   --primary-foreground: 39 19% 10%;
-  --secondary: 39 10% 20%;
+  --secondary: 39 10% 18%;
   --secondary-foreground: 39 20% 90%;
-  --muted: 39 10% 15%;
-  --muted-foreground: 39 10% 65%;
+  --muted: 39 10% 12%;
+  --muted-foreground: 39 10% 60%;
   --accent: 43 74% 49%;
   --accent-foreground: 39 19% 10%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
-  --border: 39 10% 25%;
-  --input: 39 10% 25%;
+  --border: 39 10% 22%;
+  --input: 39 10% 22%;
   --ring: 43 74% 49%;
   --radius: 0.75rem;
-
-  /* House Colors */
-  --gryffindor-primary: 0 100% 23%;
-  --gryffindor-accent: 45 70% 49%;
-  --slytherin-primary: 142 46% 19%;
-  --slytherin-accent: 0 0% 67%;
-  --ravenclaw-primary: 226 64% 15%;
-  --ravenclaw-accent: 36 53% 38%;
-  --hufflepuff-primary: 44 83% 58%;
-  --hufflepuff-accent: 0 0% 0%;
-}
-
-.theme-gryffindor {
-  --primary: var(--gryffindor-primary);
-  --accent: var(--gryffindor-accent);
-  --ring: var(--gryffindor-primary);
-}
-
-.theme-slytherin {
-  --primary: var(--slytherin-primary);
-  --accent: var(--slytherin-accent);
-  --ring: var(--slytherin-primary);
-}
-
-.theme-ravenclaw {
-  --primary: var(--ravenclaw-primary);
-  --accent: var(--ravenclaw-accent);
-  --ring: var(--ravenclaw-primary);
-}
-
-.theme-hufflepuff {
-  --primary: var(--hufflepuff-primary);
-  --accent: var(--hufflepuff-accent);
-  --ring: var(--hufflepuff-primary);
 }
 
 @layer base {
@@ -65,9 +30,9 @@
     @apply border-border;
   }
   body {
-    @apply bg-[#1e1b15] text-foreground font-body;
+    @apply bg-[#1a1814] text-foreground font-body;
     background-image: 
-      radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.4) 0%, rgba(30, 27, 21, 1) 100%),
+      radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.4) 0%, rgba(26, 24, 20, 1) 100%),
       url("https://www.transparenttextures.com/patterns/black-linen.png");
   }
   h1, h2, h3, h4, h5, h6 {
@@ -80,17 +45,17 @@
 }
 
 .glass-dark {
-  @apply bg-black/40 backdrop-blur-xl border border-white/5 shadow-2xl;
+  @apply bg-black/50 backdrop-blur-2xl border border-white/5 shadow-2xl;
 }
 
 .magical-glow {
-  box-shadow: 0 0 15px theme('colors.primary.DEFAULT / 30%');
+  box-shadow: 0 0 20px theme('colors.primary.DEFAULT / 20%');
 }
 
 .magical-hover:hover {
   @apply transition-all duration-500;
   transform: translateY(-4px);
-  filter: drop-shadow(0 0 8px theme('colors.primary.DEFAULT / 50%'));
+  filter: drop-shadow(0 0 10px theme('colors.primary.DEFAULT / 40%'));
 }
 
 .floating {
@@ -101,4 +66,19 @@
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
+}
+
+/* Scrollbar styling for the magical vibe */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
 }
